@@ -15,4 +15,7 @@ export class Receiver {
     @Column()
     email: string;
 
+    @Column()
+    userID: number;
+
 }
