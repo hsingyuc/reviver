@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Receiver } from "./Receiver";
+import { Event } from "./Event";
 
 @Entity()
 export class User {
@@ -27,5 +28,8 @@ export class User {
 
     @OneToMany(() => Receiver, receiver => receiver.user)
     receivers: Receiver[];
+
+    @OneToMany(() => Event, event => event.user)
+    events: Event[];
 
 }

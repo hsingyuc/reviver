@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from "typeorm";
 import { Receiver } from "./Receiver";
+import { User } from "./User";
 
 enum Status {
 	Ongoing,
@@ -33,5 +34,8 @@ export class Event {
 	@ManyToMany(() => Receiver)
 	@JoinTable()
 	receivers: Receiver[];
+
+	@ManyToOne(() => User, user => user.events)
+	user: User;
 
 }
