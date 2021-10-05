@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { User } from "./User";
 
 @Entity()
 export class Receiver {
@@ -15,4 +16,6 @@ export class Receiver {
     @Column()
     email: string;
 
+    @ManyToOne(() => User, user => user.receivers)
+    user: User;
 }
