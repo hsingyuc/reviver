@@ -17,7 +17,7 @@ export class Event {
 	longitude: number;
 
 	@Column()
-	duration: string;
+	duration: number;
 
 	@Column()
 	status: string;
