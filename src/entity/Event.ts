@@ -1,6 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from "typeorm";
 import { Receiver } from "./Receiver";
 
+enum Status {
+	Ongoing,
+	Updated,
+	Completed
+}
 @Entity()
 export class Event {
 
@@ -19,8 +24,8 @@ export class Event {
 	@Column()
 	duration: number;
 
-	@Column()
-	status: string;
+	@Column('int')
+	status: Status;
 
 	@Column()
 	note: string;
