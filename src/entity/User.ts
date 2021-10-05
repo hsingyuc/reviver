@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Receiver } from "./Receiver";
 
 @Entity()
 export class User {
@@ -23,5 +24,8 @@ export class User {
 
     @Column()
     phone: number;
+
+    @OneToMany(() => Receiver, receiver => receiver.user)
+    receivers: Receiver[];
 
 }
