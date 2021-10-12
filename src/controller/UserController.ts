@@ -15,7 +15,17 @@ export class UserController {
 
   async remove(request: Request, response: Response, next: NextFunction) {
     const userToRemove = await this.userRepository.findOne(request.params.id);
-    await this.userRepository.remove(userToRemove);
+    if (!userToRemove) {
+      response.status(404);
+      return { message: 'Unable to find the requested user.' };
+    }
+    try {
+      await this.userRepository.remove(userToRemove);
+      return { message: `${userToRemove.accountName} has been removed.` };
+    } catch (error) {
+      response.status(400);
+      return { message: 'Bad Request.' };
+    }
   }
 
   async update(request: Request, response: Response, next: NextFunction) {
