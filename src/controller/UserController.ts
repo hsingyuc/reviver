@@ -6,7 +6,7 @@ export class UserController {
   private userRepository = getRepository(User);
 
   async one(request: Request, response: Response, next: NextFunction) {
-    const foundUser = this.userRepository.findOne(request.params.id);
+    const foundUser = await this.userRepository.findOne(request.params.id);
 
     if (!foundUser) {
       response.status(404);
