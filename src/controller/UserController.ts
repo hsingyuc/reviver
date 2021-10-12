@@ -6,7 +6,13 @@ export class UserController {
   private userRepository = getRepository(User);
 
   async one(request: Request, response: Response, next: NextFunction) {
-    return this.userRepository.findOne(request.params.id);
+    const foundUser = this.userRepository.findOne(request.params.id);
+
+    if (!foundUser) {
+      response.status(404);
+      return { message: 'Unable to find the requested user.' };
+    }
+    return foundUser;
   }
 
   async save(request: Request, response: Response, next: NextFunction) {
