@@ -15,8 +15,20 @@ export class UserController {
     return foundUser;
   }
 
-  async save(request: Request, response: Response, next: NextFunction) {
-    return this.userRepository.save(request.body);
+  async create(request: Request, response: Response, next: NextFunction) {
+    const userCreated = this.userRepository.create(request.body);
+
+    if (!userCreated) {
+      response.status(404);
+      return { message: 'User can not be created.' };
+    }
+    try {
+      await this.userRepository.save(userCreated);
+      return userCreated;
+    } catch (error) {
+      response.status(400);
+      return { message: 'Bad Request.' };
+    }
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
