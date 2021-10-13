@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Receiver } from "./Receiver";
 import { Event } from "./Event";
-import { Length, IsEmail } from 'class-validator';
+import { Length, IsEmail, IsMobilePhone } from 'class-validator';
 @Entity()
 export class User {
 
@@ -12,7 +12,7 @@ export class User {
     accountName: string;
 
     @Column()
-    @Length(6, 20)
+    @Length(6, 20, { message: 'Please use a password between 6 to 20 characters' })
     password: string;
 
     @Column()
