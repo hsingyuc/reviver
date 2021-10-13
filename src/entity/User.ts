@@ -24,7 +24,7 @@ export class User {
     email: string;
 
     @Column()
-    phone: number;
+    phone: string;
 
     @OneToMany(() => Receiver, receiver => receiver.user)
     receivers: Receiver[];
