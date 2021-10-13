@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Receiver } from "./Receiver";
 import { Event } from "./Event";
-
+import { Length } from 'class-validator';
 @Entity()
 export class User {
 
@@ -12,6 +12,7 @@ export class User {
     accountName: string;
 
     @Column()
+    @Length(6, 20)
     password: string;
 
     @Column()
