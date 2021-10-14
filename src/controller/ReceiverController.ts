@@ -15,4 +15,13 @@ export class ReceiverController {
 		return foundAll;
 	}
 
+	async one(request: Request, response: Response, next: NextFunction) {
+		const foundOne = await this.receiverRepository.findOne(request.params.id);
+
+		if (!foundOne) {
+			response.status(404);
+			return { message: 'Unable to find the requested receiver.' };
+		}
+		return foundOne;
+	}
 }
