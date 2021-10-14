@@ -31,4 +31,9 @@ export const Routes = [{
     route: "/receivers/:id",
     controller: ReceiverController,
     action: "one"
+}, {
+    method: "post",
+    route: "/receivers",
+    controller: ReceiverController,
+    action: "create"
 }];
