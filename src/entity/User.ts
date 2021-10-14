@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Receiver } from "./Receiver";
 import { Event } from "./Event";
-import { Length, IsEmail, IsMobilePhone } from 'class-validator';
+import { Length, IsEmail } from 'class-validator';
 @Entity()
 export class User {
 
