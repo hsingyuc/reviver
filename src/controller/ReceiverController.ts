@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 import { Receiver } from '../entity/Receiver';
 import { NextFunction, Request, Response } from 'express';
+import { validate } from 'class-validator';
 
 export class ReceiverController {
 	private receiverRepository = getRepository(Receiver);
@@ -27,13 +28,14 @@ export class ReceiverController {
 
 	async create(request: Request, response: Response, next: NextFunction) {
 		const receiverCreated = this.receiverRepository.create(request.body);
+		const errors = await validate(receiverCreated, { validationError: { target: false } });
 
-		if (!receiverCreated) {
+		if (errors.length > 0) {
 			response.status(422);
-			return { message: 'Unable to create the requested receiver.' };
+			return { message: 'Please provide valid user fields.', errors };
 		}
 		try {
-			await this.receiverRepository.save(request.body);
+			this.receiverRepository.save(receiverCreated);
 			return { message: 'Receiver created.', receiver: receiverCreated };
 		} catch (error) {
 			response.status(500);

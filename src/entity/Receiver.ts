@@ -1,3 +1,4 @@
+import { IsEmail } from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { User } from "./User";
 
@@ -14,6 +15,7 @@ export class Receiver {
     lastName: string;
 
     @Column()
+    @IsEmail()
     email: string;
 
     @ManyToOne(() => User, user => user.receivers)
