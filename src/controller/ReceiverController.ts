@@ -24,4 +24,20 @@ export class ReceiverController {
 		}
 		return foundOne;
 	}
+
+	async create(request: Request, response: Response, next: NextFunction) {
+		const receiverCreated = this.receiverRepository.create(request.body);
+
+		if (!receiverCreated) {
+			response.status(422);
+			return { message: 'Unable to create the requested receiver.' };
+		}
+		try {
+			await this.receiverRepository.save(request.body);
+			return { message: 'Receiver created.', receiver: receiverCreated };
+		} catch (error) {
+			response.status(500);
+			return { message: 'Internal Server Error.' };
+		}
+	}
 }
