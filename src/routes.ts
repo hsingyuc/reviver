@@ -36,4 +36,9 @@ export const Routes = [{
     route: "/receivers",
     controller: ReceiverController,
     action: "create"
+}, {
+    method: "delete",
+    route: "/receivers/:id",
+    controller: ReceiverController,
+    action: "remove"
 }];
