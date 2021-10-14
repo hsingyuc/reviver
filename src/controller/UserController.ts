@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 import { NextFunction, Request, Response } from 'express';
 import { User } from '../entity/User';
+import { validate } from 'class-validator';
 
 export class UserController {
   private userRepository = getRepository(User);
@@ -17,17 +18,18 @@ export class UserController {
 
   async create(request: Request, response: Response, next: NextFunction) {
     const userCreated = this.userRepository.create(request.body);
+    const errors = await validate(userCreated, { validationError: { target: false } });
 
-    if (!userCreated) {
-      response.status(404);
-      return { message: 'User can not be created.' };
+    if (errors.length > 0) {
+      response.status(422);
+      return { message: 'Please provide valid user fields.', errors };
     }
     try {
       await this.userRepository.save(userCreated);
-      return userCreated;
+      return { message: 'User created.', user: userCreated };
     } catch (error) {
-      response.status(400);
-      return { message: 'Bad Request.' };
+      response.status(500);
+      return { message: 'Internal Server Error.' };
     }
   }
 
