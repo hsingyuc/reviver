@@ -43,4 +43,19 @@ export class ReceiverController {
 		}
 	}
 
+	async remove(request: Request, response: Response, next: NextFunction) {
+		const receiverToRemove = await this.receiverRepository.findOne(request.params.id);
+
+		if (!receiverToRemove) {
+			response.status(404);
+			return { message: 'Unable to find the requested receiver.' };
+		}
+		try {
+			await this.receiverRepository.remove(receiverToRemove);
+			return { message: `${receiverToRemove.firstName} has been removed.` };
+		} catch (error) {
+			response.status(400);
+			return { message: 'Bad Request.' };
+		}
+	}
 }
