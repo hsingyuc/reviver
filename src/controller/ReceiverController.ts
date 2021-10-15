@@ -58,4 +58,21 @@ export class ReceiverController {
 			return { message: 'Bad Request.' };
 		}
 	}
+
+	async update(request: Request, response: Response, next: NextFunction) {
+		const receiverToUpdate = await this.receiverRepository.findOne(request.params.id);
+
+		if (!receiverToUpdate) {
+			response.status(404);
+			return { message: 'Unable to find the requested receiver.' };
+		}
+		try {
+			await this.receiverRepository.update(receiverToUpdate, request.body);
+			return this.receiverRepository.findOne(request.params.id);
+		} catch (error) {
+			response.status(400);
+			return { message: 'Bad Request.' };
+		}
+	}
+
 }
