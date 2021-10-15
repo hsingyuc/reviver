@@ -41,4 +41,9 @@ export const Routes = [{
     route: "/receivers/:id",
     controller: ReceiverController,
     action: "remove"
+}, {
+    method: "put",
+    route: "/receivers/:id",
+    controller: ReceiverController,
+    action: "update"
 }];
