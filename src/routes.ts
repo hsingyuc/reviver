@@ -52,4 +52,9 @@ export const Routes = [{
     route: "/events/:id",
     controller: EventController,
     action: "one"
+}, {
+    method: "post",
+    route: "/events",
+    controller: EventController,
+    action: "create"
 }];
