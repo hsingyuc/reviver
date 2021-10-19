@@ -14,4 +14,14 @@ export class EventController {
 		}
 		return foundAll;
 	}
+
+	async one(request: Request, response: Response, next: NextFunction) {
+		const foundOne = await this.eventRepository.find(request.params.id);
+
+		if (!foundOne) {
+			response.status(404);
+			return { message: 'Unable to find the requested event.' };
+		}
+		return foundOne;
+	}
 }
