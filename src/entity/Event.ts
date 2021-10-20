@@ -17,10 +17,10 @@ export class Event {
 	@CreateDateColumn()
 	createdDate: Date;
 
-	@Column()
+	@Column("decimal", { precision: 8, scale: 6 })
 	latitude: number;
 
-	@Column()
+	@Column("decimal", { precision: 9, scale: 6 })
 	longitude: number;
 
 	@Column()
