@@ -1,20 +1,21 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, CreateDateColumn } from "typeorm";
 import { Receiver } from "./Receiver";
 import { User } from "./User";
 
 enum Status {
-	Ongoing,
-	Updated,
-	Completed
+	Ongoing = 'ongoing',
+	Updated = 'updated',
+	Completed = 'completed'
 }
+
 @Entity()
 export class Event {
 
 	@PrimaryGeneratedColumn()
 	id: number;
 
-	@Column({ unique: true })
-	date: number;
+	@CreateDateColumn()
+	createdDate: Date;
 
 	@Column()
 	latitude: number;
@@ -25,7 +26,7 @@ export class Event {
 	@Column()
 	duration: number;
 
-	@Column('int')
+	@Column({ default: Status.Ongoing })
 	status: Status;
 
 	@Column()
