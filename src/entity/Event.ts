@@ -14,8 +14,8 @@ export class Event {
 	@PrimaryGeneratedColumn()
 	id: number;
 
-	@Column({ unique: true })
-	date: number;
+	@CreateDateColumn()
+	createdDate: Date;
 
 	@Column()
 	latitude: number;
