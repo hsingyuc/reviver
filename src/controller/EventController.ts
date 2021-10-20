@@ -17,7 +17,7 @@ export class EventController {
 	}
 
 	async one(request: Request, response: Response, next: NextFunction) {
-		const foundOne = await this.eventRepository.find(request.params.id);
+		const foundOne = await this.eventRepository.findOne(request.params.id);
 
 		if (!foundOne) {
 			response.status(404);
