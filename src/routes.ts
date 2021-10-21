@@ -44,11 +44,6 @@ export const Routes = [{
     action: "update"
 }, {
     method: "get",
-    route: "/events",
-    controller: EventController,
-    action: "all"
-}, {
-    method: "get",
     route: "/events/:id",
     controller: EventController,
     action: "one"
