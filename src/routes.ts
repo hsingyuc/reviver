@@ -57,4 +57,9 @@ export const Routes = [{
     route: "/events/:id",
     controller: EventController,
     action: "remove"
+}, {
+    method: "put",
+    route: "/events/:id",
+    controller: EventController,
+    action: "update"
 }];
