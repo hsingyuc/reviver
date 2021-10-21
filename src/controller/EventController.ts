@@ -42,4 +42,21 @@ export class EventController {
 			return { message: 'Internal Server Error.' };
 		}
 	}
+
+	async remove(request: Request, response: Response, next: NextFunction) {
+		const eventToRemove = await this.eventRepository.findOne(request.params.id);
+
+		if (!eventToRemove) {
+			response.status(404);
+			return { message: 'Unable to find the requested event.' };
+		}
+		try {
+			await this.eventRepository.remove(eventToRemove);
+			return { message: 'Event has been removed.' };
+		} catch (error) {
+			response.status(400);
+			return { message: 'Bad Request.' };
+		}
+	}
+
 }
