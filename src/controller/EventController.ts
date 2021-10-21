@@ -6,16 +6,6 @@ import { validate } from 'class-validator';
 export class EventController {
 	private eventRepository = getRepository(Event);
 
-	async all(request: Request, response: Response, next: NextFunction) {
-		const foundAll = await this.eventRepository.find();
-
-		if (!foundAll) {
-			response.status(404);
-			return { message: 'Unable to find the requested events.' };
-		}
-		return foundAll;
-	}
-
 	async one(request: Request, response: Response, next: NextFunction) {
 		const foundOne = await this.eventRepository.findOne(request.params.id);
 
