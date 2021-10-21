@@ -58,7 +58,7 @@ export class EventController {
 			return { message: 'Unable to find the requested event.' };
 		}
 		try {
-			await this.eventRepository.update(eventToUpdate, request.body);
+			await this.eventRepository.update(request.params.id, request.body);
 			return this.eventRepository.findOne(request.params.id);
 		} catch (error) {
 			response.status(400);
