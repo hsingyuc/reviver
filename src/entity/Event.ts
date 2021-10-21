@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, CreateDateColumn } from "typeorm";
 import { Receiver } from "./Receiver";
 import { User } from "./User";
-import { IsInt } from 'class-validator';
+import { Min } from 'class-validator';
 
 enum Status {
 	Ongoing = 'ongoing',
@@ -24,8 +24,7 @@ export class Event {
 	@Column("decimal", { precision: 9, scale: 6 })
 	longitude: number;
 
-	@Column()
-	@IsInt()
+	@Column({ type: 'bigint' })
 	duration: number;
 
 	@Column({ default: Status.Ongoing })
