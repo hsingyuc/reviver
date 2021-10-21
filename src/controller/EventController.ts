@@ -25,6 +25,7 @@ export class EventController {
 			return { message: 'Please provide valid input fields.', errors };
 		}
 		try {
+			console.log(eventCreated);
 			await this.eventRepository.save(eventCreated);
 			return { message: 'Event created.', event: eventCreated };
 		} catch (error) {
@@ -43,6 +44,22 @@ export class EventController {
 		try {
 			await this.eventRepository.remove(eventToRemove);
 			return { message: 'Event has been removed.' };
+		} catch (error) {
+			response.status(400);
+			return { message: 'Bad Request.' };
+		}
+	}
+
+	async update(request: Request, response: Response, next: NextFunction) {
+		const eventToUpdate = await this.eventRepository.findOne(request.params.id);
+
+		if (!eventToUpdate) {
+			response.status(404);
+			return { message: 'Unable to find the requested event.' };
+		}
+		try {
+			await this.eventRepository.update(eventToUpdate, request.body);
+			return this.eventRepository.findOne(request.params.id);
 		} catch (error) {
 			response.status(400);
 			return { message: 'Bad Request.' };
