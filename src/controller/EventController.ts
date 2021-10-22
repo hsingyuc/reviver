@@ -25,7 +25,6 @@ export class EventController {
 			return { message: 'Please provide valid input fields.', errors };
 		}
 		try {
-			console.log(eventCreated);
 			await this.eventRepository.save(eventCreated);
 			return { message: 'Event created.', event: eventCreated };
 		} catch (error) {
