@@ -41,7 +41,7 @@ export class UserController {
     }
     try {
       await this.userRepository.remove(userToRemove);
-      return { message: `${userToRemove.accountName} has been removed.` };
+      return { message: 'User has been removed.' };
     } catch (error) {
       response.status(400);
       return { message: 'Bad Request.' };
