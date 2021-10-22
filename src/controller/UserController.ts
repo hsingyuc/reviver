@@ -56,7 +56,7 @@ export class UserController {
       return { message: 'Unable to find the requested user.' };
     }
     try {
-      await this.userRepository.update(userToUpdate, request.body);
+      await this.userRepository.update(request.params.id, request.body);
       return this.userRepository.findOne(request.params.id);
     } catch (error) {
       response.status(400);
