@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, CreateDateColumn } from "typeorm";
 import { Receiver } from "./Receiver";
 import { User } from "./User";
-import { Min } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 enum Status {
 	Ongoing = 'ongoing',
@@ -19,18 +19,21 @@ export class Event {
 	createdDate: Date;
 
 	@Column("decimal", { precision: 8, scale: 6 })
+	@IsNotEmpty()
 	latitude: number;
 
 	@Column("decimal", { precision: 9, scale: 6 })
+	@IsNotEmpty()
 	longitude: number;
 
 	@Column({ type: 'bigint' })
+	@IsNotEmpty()
 	duration: number;
 
 	@Column({ default: Status.Ongoing })
 	status: Status;
 
-	@Column()
+	@Column({ nullable: true })
 	note: string;
 
 	@ManyToMany(() => Receiver)
