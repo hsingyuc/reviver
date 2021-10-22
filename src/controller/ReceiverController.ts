@@ -25,7 +25,7 @@ export class ReceiverController {
 			return { message: 'Please provide valid user fields.', errors };
 		}
 		try {
-			this.receiverRepository.save(receiverCreated);
+			await this.receiverRepository.save(receiverCreated);
 			return { message: 'Receiver created.', receiver: receiverCreated };
 		} catch (error) {
 			response.status(500);
