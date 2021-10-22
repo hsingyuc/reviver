@@ -18,14 +18,13 @@ export class EventController {
 
 	async create(request: Request, response: Response, next: NextFunction) {
 		const eventCreated = this.eventRepository.create(request.body);
-		const errors = await validate(eventCreated);
+		const errors = await validate(eventCreated, { validationError: { target: false } });
 
 		if (errors.length > 0) {
 			response.status(422);
 			return { message: 'Please provide valid input fields.', errors };
 		}
 		try {
-			console.log(eventCreated);
 			await this.eventRepository.save(eventCreated);
 			return { message: 'Event created.', event: eventCreated };
 		} catch (error) {
