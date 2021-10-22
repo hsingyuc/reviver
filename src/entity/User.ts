@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Receiver } from "./Receiver";
 import { Event } from "./Event";
-import { Length, IsEmail } from 'class-validator';
+import { Length, IsEmail, IsNotEmpty } from 'class-validator';
 @Entity()
 export class User {
 
@@ -9,6 +9,7 @@ export class User {
     id: number;
 
     @Column({ unique: true })
+    @IsNotEmpty()
     accountName: string;
 
     @Column()
@@ -16,16 +17,20 @@ export class User {
     password: string;
 
     @Column()
+    @IsNotEmpty()
     firstName: string;
 
     @Column()
+    @IsNotEmpty()
     lastName: string;
 
     @Column()
     @IsEmail()
+    @IsNotEmpty()
     email: string;
 
     @Column()
+    @IsNotEmpty()
     phone: string;
 
     @OneToMany(() => Receiver, receiver => receiver.user)
