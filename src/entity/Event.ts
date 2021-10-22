@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Receiver } from "./Receiver";
 import { User } from "./User";
 import { IsNotEmpty } from 'class-validator';
@@ -35,6 +35,9 @@ export class Event {
 
 	@Column({ nullable: true })
 	note: string;
+
+	@UpdateDateColumn()
+	updatedDate: Date;
 
 	@ManyToMany(() => Receiver)
 	@JoinTable()
