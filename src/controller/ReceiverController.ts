@@ -57,7 +57,7 @@ export class ReceiverController {
 			return { message: 'Unable to find the requested receiver.' };
 		}
 		try {
-			await this.receiverRepository.update(receiverToUpdate, request.body);
+			await this.receiverRepository.update(request.params.id, request.body);
 			return this.receiverRepository.findOne(request.params.id);
 		} catch (error) {
 			response.status(400);
