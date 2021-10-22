@@ -33,7 +33,7 @@ export class Event {
 	@Column({ default: Status.Ongoing })
 	status: Status;
 
-	@Column()
+	@Column({ nullable: true })
 	note: string;
 
 	@ManyToMany(() => Receiver)
