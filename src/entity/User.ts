@@ -10,7 +10,7 @@ export class User {
 
     @Column({ unique: true })
     @IsNotEmpty()
-    accountName: string;
+    userName: string;
 
     @Column()
     @Length(6, 20, { message: 'Please use a password between 6 to 20 characters' })
