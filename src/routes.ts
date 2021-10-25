@@ -1,6 +1,7 @@
 import { UserController } from "./controller/UserController";
 import { ReceiverController } from "./controller/ReceiverController";
 import { EventController } from "./controller/EventController";
+import { AuthController } from "./controller/AuthController";
 
 export const Routes = [{
     method: "get",
@@ -62,4 +63,9 @@ export const Routes = [{
     route: "/events/:id",
     controller: EventController,
     action: "update"
+}, {
+    method: "post",
+    route: "/auth/register",
+    controller: AuthController,
+    action: "register"
 }];
