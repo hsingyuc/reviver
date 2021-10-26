@@ -1,7 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BeforeInsert, BeforeUpdate } from "typeorm";
 import { Receiver } from "./Receiver";
 import { Event } from "./Event";
 import { Length, IsEmail, IsNotEmpty } from 'class-validator';
+
+const bcrypt = require('bcrypt');
 @Entity()
 export class User {
 
@@ -39,4 +41,11 @@ export class User {
     @OneToMany(() => Event, event => event.user)
     events: Event[];
 
+    @BeforeInsert()
+    @BeforeUpdate()
+    hashPassword() {
+        if (this.password) {
+            this.password = bcrypt.hashSync(this.password, 10);
+        }
+    }
 }
