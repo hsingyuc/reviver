@@ -22,4 +22,18 @@ export class AuthController {
 			return { message: 'Internal Server Error.' };
 		}
 	}
+
+	async login(request: Request, response: Response) {
+		try {
+			const user = await User.checkLogin(request.body.username);
+			return { message: 'User found.' };
+		} catch (error) {
+			response.status(error.code);
+			return { message: error.message };
+		}
+
+		// check password
+		// save token(cookie) at server
+		// allow login
+	}
 }

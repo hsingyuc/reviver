@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BeforeInsert, BeforeUpdate } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BeforeInsert, BeforeUpdate, getRepository } from "typeorm";
 import { Receiver } from "./Receiver";
 import { Event } from "./Event";
 import { Length, IsEmail, IsNotEmpty } from 'class-validator';
@@ -48,4 +48,21 @@ export class User {
             this.password = bcrypt.hashSync(this.password, 10);
         }
     }
+
+    static async checkLogin(username: string) {
+        if (!username) {
+            throw { code: 400, message: 'Username is required!' };
+        }
+
+        const repository = getRepository(User);
+        const user = await repository.findOne({ username: username })
+
+        if (!user) {
+            throw { code: 401, message: 'No user with that username found!' };
+        }
+
+        // @Todo add check password function
+        return user;
+    }
+
 }
