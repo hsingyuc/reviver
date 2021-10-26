@@ -16,23 +16,6 @@ export class UserController {
     return foundUser;
   }
 
-  async create(request: Request, response: Response, next: NextFunction) {
-    const userCreated = this.userRepository.create(request.body);
-    const errors = await validate(userCreated, { validationError: { target: false } });
-
-    if (errors.length > 0) {
-      response.status(422);
-      return { message: 'Please provide valid user fields.', errors };
-    }
-    try {
-      await this.userRepository.save(userCreated);
-      return { message: 'User created.', user: userCreated };
-    } catch (error) {
-      response.status(500);
-      return { message: 'Internal Server Error.' };
-    }
-  }
-
   async remove(request: Request, response: Response, next: NextFunction) {
     const userToRemove = await this.userRepository.findOne(request.params.id);
     if (!userToRemove) {
