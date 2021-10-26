@@ -14,11 +14,12 @@ export class AuthController {
 			response.status(422);
 			return { message: 'Please provide valid user fields.', errors };
 		}
-
-		// encrypt the password
-
-		// create user
-
-		// save user
+		try {
+			await this.userRepository.save(userCreated);
+			return { message: 'User created.', user: userCreated };
+		} catch (error) {
+			response.status(500);
+			return { message: 'Internal Server Error.' };
+		}
 	}
 }
