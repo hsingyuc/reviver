@@ -4,6 +4,7 @@ import { Event } from "./Event";
 import { Length, IsEmail, IsNotEmpty } from 'class-validator';
 
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 @Entity()
 export class User {
 
@@ -74,7 +75,15 @@ export class User {
         return user;
     }
 
-    //@Todo Add create token(cookie) function
+    getToken() {
+        const token = jwt.sign(
+            { id: this.id, username: this.username },
+            'secret',
+            { expiresIn: "72h", }
+        );
+
+        return token;
+    }
 
     //@Todo Add check token function
 
