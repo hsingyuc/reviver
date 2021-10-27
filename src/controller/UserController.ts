@@ -6,16 +6,6 @@ import { validate } from 'class-validator';
 export class UserController {
   private userRepository = getRepository(User);
 
-  async one(request: Request, response: Response, next: NextFunction) {
-    const foundUser = await this.userRepository.findOne(request.params.id);
-
-    if (!foundUser) {
-      response.status(404);
-      return { message: 'Unable to find the requested user.' };
-    }
-    return foundUser;
-  }
-
   async remove(request: Request, response: Response, next: NextFunction) {
     const userToRemove = await this.userRepository.findOne(request.params.id);
     if (!userToRemove) {

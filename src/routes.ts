@@ -4,11 +4,6 @@ import { EventController } from "./controller/EventController";
 import { AuthController } from "./controller/AuthController";
 
 export const Routes = [{
-    method: "get",
-    route: "/users/:id",
-    controller: UserController,
-    action: "one"
-}, {
     method: "post",
     route: "/users",
     controller: UserController,
