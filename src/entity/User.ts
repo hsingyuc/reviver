@@ -49,9 +49,13 @@ export class User {
         }
     }
 
-    static async checkLogin(username: string) {
+    static async login(username: string, password: string) {
         if (!username) {
             throw { code: 400, message: 'Username is required!' };
+        }
+
+        if (!password) {
+            throw { code: 400, message: 'Password is required!' };
         }
 
         const repository = getRepository(User);
@@ -61,8 +65,17 @@ export class User {
             throw { code: 401, message: 'No user with that username found!' };
         }
 
-        // @Todo add check password function
+        const isValid = bcrypt.compareSync(password, user.password);
+
+        if (!isValid) {
+            throw { code: 401, message: 'Password is incorrect!' };
+        }
+
         return user;
     }
+
+    //@Todo Add create token(cookie) function
+
+    //@Todo Add check token function
 
 }
