@@ -35,4 +35,9 @@ export class AuthController {
 		}
 	}
 
+	async logout(request: Request, response: Response) {
+		response.clearCookie('loginToken');
+		return { message: 'Logged out successfully.' };
+	}
+
 }
