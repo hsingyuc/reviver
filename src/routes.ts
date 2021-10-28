@@ -68,4 +68,9 @@ export const Routes = [{
     route: "/auth/login",
     controller: AuthController,
     action: "login"
+}, {
+    method: "post",
+    route: "/auth/logout",
+    controller: AuthController,
+    action: "logout"
 }];
