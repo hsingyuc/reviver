@@ -2,7 +2,7 @@ import { UserController } from "./controller/UserController";
 import { ReceiverController } from "./controller/ReceiverController";
 import { EventController } from "./controller/EventController";
 import { AuthController } from "./controller/AuthController";
-
+import { authenticate } from './middleware';
 export const Routes = [{
     method: "post",
     route: "/users",
@@ -12,52 +12,62 @@ export const Routes = [{
     method: "delete",
     route: "/users/:id",
     controller: UserController,
-    action: "remove"
+    action: "remove",
+    middleware: authenticate
 }, {
     method: "put",
     route: "/users/:id",
     controller: UserController,
-    action: "update"
+    action: "update",
+    middleware: authenticate
 }, {
     method: "get",
     route: "/receivers/:id",
     controller: ReceiverController,
-    action: "one"
+    action: "one",
+    middleware: authenticate
 }, {
     method: "post",
     route: "/receivers",
     controller: ReceiverController,
-    action: "create"
+    action: "create",
+    middleware: authenticate
 }, {
     method: "delete",
     route: "/receivers/:id",
     controller: ReceiverController,
-    action: "remove"
+    action: "remove",
+    middleware: authenticate
 }, {
     method: "put",
     route: "/receivers/:id",
     controller: ReceiverController,
-    action: "update"
+    action: "update",
+    middleware: authenticate
 }, {
     method: "get",
     route: "/events/:id",
     controller: EventController,
-    action: "one"
+    action: "one",
+    middleware: authenticate
 }, {
     method: "post",
     route: "/events",
     controller: EventController,
-    action: "create"
+    action: "create",
+    middleware: authenticate
 }, {
     method: "delete",
     route: "/events/:id",
     controller: EventController,
-    action: "remove"
+    action: "remove",
+    middleware: authenticate
 }, {
     method: "put",
     route: "/events/:id",
     controller: EventController,
-    action: "update"
+    action: "update",
+    middleware: authenticate
 }, {
     method: "post",
     route: "/auth/register",
@@ -72,5 +82,5 @@ export const Routes = [{
     method: "post",
     route: "/auth/logout",
     controller: AuthController,
-    action: "logout"
+    action: "logout",
 }];
