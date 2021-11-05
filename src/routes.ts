@@ -4,11 +4,6 @@ import { EventController } from "./controller/EventController";
 import { AuthController } from "./controller/AuthController";
 import { authenticate } from './middleware';
 export const Routes = [{
-    method: "post",
-    route: "/users",
-    controller: UserController,
-    action: "create"
-}, {
     method: "delete",
     route: "/users/:id",
     controller: UserController,
