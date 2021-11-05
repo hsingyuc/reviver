@@ -36,8 +36,13 @@ export class AuthController {
 	}
 
 	async logout(request: Request, response: Response) {
-		response.clearCookie('loginToken');
-		return { message: 'Logged out successfully.' };
+		const token = request.cookies.loginToken;
+		if (token) {
+			response.clearCookie('loginToken');
+			return { message: 'Logged out successfully.' };
+		}
+		response.status(403);
+		return { message: 'Forbidden.' };
 	}
 
 }
