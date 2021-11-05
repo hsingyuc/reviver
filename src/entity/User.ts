@@ -85,6 +85,4 @@ export class User {
         return token;
     }
 
-    //@Todo Add check token function
-
 }
