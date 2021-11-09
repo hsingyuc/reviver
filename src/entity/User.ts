@@ -78,7 +78,7 @@ export class User {
     getToken() {
         const token = jwt.sign(
             { id: this.id, username: this.username },
-            'secret',
+            process.env.SECRET,
             { expiresIn: "72h", }
         );
 
