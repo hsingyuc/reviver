@@ -14,6 +14,8 @@ createConnection().then(async connection => {
     app.use(bodyParser.json());
     app.use(cookieParser());
 
+    require('dotenv').config();
+
     // register express routes from defined application routes
     Routes.forEach(route => {
         const middleware = route.middleware

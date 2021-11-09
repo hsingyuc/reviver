@@ -12,7 +12,7 @@ export const authenticate = (request: Request, response: Response, next: NextFun
 		response.status(401);
 		return response.json({ message: 'Unauthenticate.' });
 	}
-	jwt.verify(token, 'secret', async function (err, data) {
+	jwt.verify(token, process.env.SECRET, async function (err, data) {
 		if (err) {
 			response.status(401);
 			return response.json({ message: 'Unauthenticate.' });
