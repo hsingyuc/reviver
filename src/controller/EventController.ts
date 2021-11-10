@@ -17,7 +17,7 @@ export class EventController {
 	}
 
 	async create(request: Request, response: Response, next: NextFunction) {
-		const eventCreated = this.eventRepository.create(request.body);
+		const eventCreated = this.eventRepository.create({ ...request.body, user: request.user.id });
 		const errors = await validate(eventCreated, { validationError: { target: false } });
 
 		if (errors.length > 0) {
