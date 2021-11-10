@@ -1,10 +1,10 @@
-{
+module.exports = {
    "type": "mysql",
-   "host": "localhost",
-   "port": 3306,
-   "username": "root",
-   "password": "g^e5Lr5%wqzLvu2t",
-   "database": "reviver",
+   "host": process.env.HOST,
+   "port": process.env.PORT,
+   "username": process.env.USERNAME,
+   "password": process.env.PASSWORD,
+   "database": process.env.DATABASE,
    "synchronize": true,
    "logging": false,
    "entities": [
