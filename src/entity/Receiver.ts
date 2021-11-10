@@ -8,7 +8,7 @@ export class Receiver {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ unique: true })
+    @Column()
     firstName: string;
 
     @Column()
