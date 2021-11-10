@@ -17,7 +17,7 @@ export class ReceiverController {
 	}
 
 	async create(request: Request, response: Response, next: NextFunction) {
-		const receiverCreated = this.receiverRepository.create(request.body);
+		const receiverCreated = await this.receiverRepository.create({ ...request.body, user: request.user.id });
 		const errors = await validate(receiverCreated, { validationError: { target: false } });
 
 		if (errors.length > 0) {
